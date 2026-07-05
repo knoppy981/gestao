@@ -1,12 +1,12 @@
-// Prisma schema — MongoDB, infra only (no models defined yet).
+// Prisma schema — Supabase PostgreSQL, infra only (no models defined yet).
 // Docs: https://pris.ly/d/prisma-schema
-// MongoDB stays on Prisma 6.x with the classic `prisma-client-js` generator.
+// Prisma 7: connection URLs live in prisma.config.ts, not here.
 
 generator client {
-  provider = "prisma-client-js"
+  provider = "prisma-client"
+  output   = "../generated/prisma"
 }
 
 datasource db {
-  provider = "mongodb"
-  url      = env("DATABASE_URL")
+  provider = "postgresql"
 }
