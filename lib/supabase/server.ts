@@ -1,5 +1,6 @@
 import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
+import { cache } from "react";
 
 // Supabase client for Server Components, Route Handlers, and Server Actions.
 // Create a fresh client per request — cookies() is request-scoped, so never
@@ -9,7 +10,7 @@ export async function createClient() {
 
   return createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!,
     {
       cookies: {
         getAll() {
@@ -29,3 +30,14 @@ export async function createClient() {
     },
   );
 }
+
+// Authenticated user for the current request, memoized per render pass so
+// nested layouts/pages share a single Supabase Auth check instead of each
+// making its own round-trip.
+export const getUser = cache(async () => {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  return user;
+});

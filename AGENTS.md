@@ -14,5 +14,5 @@ Next.js + Supabase only. Data and auth go through the Supabase client (`@supabas
 
 - `lib/supabase/client.ts` — Supabase browser client (`createBrowserClient`). Use it in Client Components.
 - `lib/supabase/server.ts` — Supabase server client (`createServerClient`, async, wired to Next's `cookies()`). Use it in Server Components, Route Handlers, and Server Actions. Create a fresh client per request; never share one across requests.
-- `.env` (gitignored) — `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` (Supabase dashboard → Project Settings → API). See `.env.example`.
+- `.env` (gitignored) — `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` (Supabase dashboard → Project Settings → API). See `.env.example`.
 - `app/` — Next.js App Router routes, layouts, and pages.
